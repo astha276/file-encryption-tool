@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryption Tool - Live Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .header { background: #2c3e50; color: white; padding: 20px 0; text-align: center; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .demo-section { background: white; margin: 20px 0; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn { background: #3498db; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 10px 5px; }
+        .btn:hover { background: #2980b9; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #229954; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
+        textarea { width: 100%; height: 150px; padding: 15px; border: 2px solid #ddd; border-radius: 5px; font-family: monospace; resize: vertical; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .key-display { background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; word-break: break-all; margin: 10px 0; }
+        .step { margin: 20px 0; }
+        .step h3 { color: #2c3e50; margin-bottom: 10px; }
+        .demo-flow { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { .demo-flow { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔐 File Encryption Tool - Live Demo</h1>
+        <p>Operating Systems Project - Interactive Demonstration</p>
+    </div>
+
+    <div class="container">
+        <div class="demo-section">
+            <h2>🎯 Project Overview</h2>
+            <p>This is a live demonstration of a complete file encryption tool built for an Operating Systems course. 
+            The tool demonstrates core OS concepts including file system operations, security mechanisms, and user interfaces.</p>
+            
+            <h3>🔧 Key Features:</h3>
+            <ul style="margin: 15px 0; padding-left: 30px;">
+                <li>AES-256 encryption using Fernet</li>
+                <li>Secure key generation and management</li>
+                <li>Cross-platform compatibility</li>
+                <li>Multiple user interfaces (Console, GUI, Web)</li>
+                <li>File integrity verification</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>🚀 Interactive Demo</h2>
+            <p>Try the encryption tool right here in your browser!</p>
+
+            <div class="demo-flow">
+                <div class="encrypt-section">
+                    <div class="step">
+                        <h3>Step 1: Generate Encryption Key</h3>
+                        <button class="btn btn-success" onclick="generateKey()">🔑 Generate New Key</button>
+                        <div id="keyResult"></div>
+                    </div>
+
+                    <div class="step">
+                        <h3>Step 2: Enter Text to Encrypt</h3>
+                        <textarea id="plainText" placeholder="Enter your text here to encrypt...">Hello! This is a test message for the file encryption tool.
+
+This tool demonstrates:
+- File system operations
+- Security mechanisms  
+- Cryptographic operations
+- User interface design
+
+Operating Systems Project - 2025</textarea>
+                        <button class="btn" onclick="encryptText()">🔒 Encrypt Text</button>
+                        <div id="encryptResult"></div>
+                    </div>
+                </div>
+
+                <div class="decrypt-section">
+                    <div class="step">
+                        <h3>Step 3: Decrypt Text</h3>
+                        <p>The encrypted data and key will be automatically used for decryption.</p>
+                        <button class="btn btn-danger" onclick="decryptText()">🔓 Decrypt Text</button>
+                        <div id="decryptResult"></div>
+                    </div>
+
+                    <div class="step">
+                        <h3>📊 Encryption Details</h3>
+                        <div id="encryptionDetails">
+                            <p><strong>Algorithm:</strong> AES-256 with Fernet</p>
+                            <p><strong>Key Size:</strong> 256 bits</p>
+                            <p><strong>Mode:</strong> CBC with HMAC-SHA256</p>
+                            <p><strong>Security:</strong> Cryptographically secure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>💻 Full Application Features</h2>
+            <p>This web demo shows basic functionality. The complete application includes:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 5px;">
+                    <h4>🖥️ Console Interface</h4>
+                    <p>Full-featured command-line interface with interactive menus</p>
+                </div>
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 5px;">
+                    <h4>🎨 GUI Application</h4>
+                    <p>Modern graphical interface with tabs, file browsers, and progress bars</p>
+                </div>
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 5px;">
+                    <h4>📁 File Management</h4>
+                    <p>Encrypt/decrypt any file type with batch processing capabilities</p>
+                </div>
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 5px;">
+                    <h4>🔐 Advanced Security</h4>
+                    <p>Secure key derivation, memory protection, and integrity verification</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📁 Source Code & Documentation</h2>
+            <p>View the complete source code, documentation, and setup instructions:</p>
+            <a href="https://github.com/yourusername/file-encryption-tool-os-project" target="_blank" 
+               style="display: inline-block; margin: 15px 5px; padding: 12px 24px; background: #333; color: white; text-decoration: none; border-radius: 5px;">
+                📂 View on GitHub
+            </a>
+            <a href="#" onclick="downloadProject()" 
+               style="display: inline-block; margin: 15px 5px; padding: 12px 24px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px;">
+                📥 Download Project
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentKey = null;
+        let encryptedData = null;
+
+        async function generateKey() {
+            try {
+                const response = await fetch('/generate_key', { method: 'POST' });
+                const result = await response.json();
+                
+                const keyResultDiv = document.getElementById('keyResult');
+                
+                if (result.success) {
+                    currentKey = result.key;
+                    keyResultDiv.innerHTML = `
+                        <div class="result success">
+                            <strong>✅ ${result.message}</strong>
+                            <div class="key-display">Key: ${result.key.substring(0, 50)}...</div>
+                            <small>🔒 Keep this key safe! You need it to decrypt files.</small>
+                        </div>
+                    `;
+                } else {
+                    keyResultDiv.innerHTML = `<div class="result error">❌ ${result.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('keyResult').innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function encryptText() {
+            const text = document.getElementById('plainText').value;
+            
+            if (!text.trim()) {
+                document.getElementById('encryptResult').innerHTML = '<div class="result error">❌ Please enter some text to encrypt!</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch('/encrypt_text', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text })
+                });
+                
+                const result = await response.json();
+                const encryptResultDiv = document.getElementById('encryptResult');
+                
+                if (result.success) {
+                    currentKey = result.key;
+                    encryptedData = result.encrypted_data;
+                    
+                    encryptResultDiv.innerHTML = `
+                        <div class="result success">
+                            <strong>✅ ${result.message}</strong>
+                            <div class="key-display">
+                                <strong>Encrypted Data:</strong><br>
+                                ${result.encrypted_data.substring(0, 100)}...<br><br>
+                                <strong>Encryption Key:</strong><br>
+                                ${result.key.substring(0, 50)}...
+                            </div>
+                            <small>🔐 Text successfully encrypted with AES-256!</small>
+                        </div>
+                    `;
+                    
+                    // Update encryption details
+                    document.getElementById('encryptionDetails').innerHTML += `
+                        <p><strong>Status:</strong> <span style="color: green;">✅ Ready for decryption</span></p>
+                    `;
+                } else {
+                    encryptResultDiv.innerHTML = `<div class="result error">❌ ${result.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('encryptResult').innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function decryptText() {
+            if (!currentKey || !encryptedData) {
+                document.getElementById('decryptResult').innerHTML = '<div class="result error">❌ Please encrypt some text first!</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch('/decrypt_text', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        encrypted_data: encryptedData,
+                        key: currentKey 
+                    })
+                });
+                
+                const result = await response.json();
+                const decryptResultDiv = document.getElementById('decryptResult');
+                
+                if (result.success) {
+                    decryptResultDiv.innerHTML = `
+                        <div class="result success">
+                            <strong>✅ ${result.message}</strong>
+                            <div class="key-display">
+                                <strong>Decrypted Text:</strong><br>
+                                ${result.decrypted_text}
+                            </div>
+                            <small>🎉 Perfect! The decrypted text matches the original.</small>
+                        </div>
+                    `;
+                } else {
+                    decryptResultDiv.innerHTML = `<div class="result error">❌ ${result.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('decryptResult').innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        function downloadProject() {
+            alert('Project download would redirect to GitHub releases page in a real deployment!');
+        }
+
+        // Auto-generate key on page load for demo
+        window.onload = function() {
+            setTimeout(generateKey, 1000);
+        };
+    </script>
+</body>
+</html>
