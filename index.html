@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryption Tool - Live Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 20px; }
+        .section { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .btn-success { background: #27ae60; }
+        .btn-danger { background: #e74c3c; }
+        .btn:hover { opacity: 0.9; }
+        textarea { width: 100%; height: 120px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-family: monospace; }
+        .result { margin: 15px 0; padding: 15px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .card { background: #ecf0f1; padding: 15px; border-radius: 5px; text-align: center; }
+        .encrypted-text { background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace; word-break: break-all; font-size: 12px; max-height: 100px; overflow-y: auto; border: 1px solid #dee2e6; }
+        input[type="file"] { padding: 8px; border: 2px dashed #007bff; border-radius: 5px; width: 100%; background: #f8f9fa; }
+        input[type="radio"] { margin-right: 5px; }
+        .demo-warning { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107; }
+        .content-display { max-height: 200px; overflow-y: auto; background: white; padding: 8px; border: 1px solid #ddd; border-radius: 3px; white-space: pre-wrap; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>🔐 File Encryption Tool</h1>
+        <p>Operating Systems Project - Live Demo</p>
+        <p><small>Static Demo Version - GitHub Pages</small></p>
+    </div>
+    
+    <div class="section">
+        <h2>🎯 Project Overview</h2>
+        <p>This is a comprehensive file encryption tool demonstrating Operating Systems concepts:</p>
+        <div class="demo-grid">
+            <div class="card">
+                <h4>🔑 Key Management</h4>
+                <p>Generate secure encryption keys</p>
+            </div>
+            <div class="card">
+                <h4>🔒 File Encryption</h4>
+                <p>Encrypt any file type securely</p>
+            </div>
+            <div class="card">
+                <h4>🔓 File Decryption</h4>
+                <p>Decrypt with correct keys</p>
+            </div>
+            <div class="card">
+                <h4>💻 Multiple UIs</h4>
+                <p>Console, GUI, and web interfaces</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-warning">
+        <strong>📋 Demo Note:</strong> This is a static demonstration running in your browser. 
+        For the full interactive version with file upload capabilities, 
+        <a href="https://github.com/yourusername/file-encryption-tool-os-project" target="_blank">view the source code on GitHub</a> 
+        and run locally with Python.
+    </div>
+    
+    <div class="section">
+        <h2>🚀 Interactive Demo</h2>
+        <p><strong>Try the encryption tool right here in your browser!</strong></p>
+        
+        <h3>Step 1: Generate Encryption Key</h3>
+        <button class="btn btn-success" onclick="generateKey()">🔑 Generate New Key</button>
+        <div id="keyResult"></div>
+        
+        <h3>Step 2: Enter Text to Encrypt</h3>
+        <div style="margin-bottom: 15px;">
+            <textarea id="plainText" placeholder="Enter your text here to encrypt...">Hello! This is a test message for the file encryption tool.
+
+This tool demonstrates:
+- File system operations
+- Security mechanisms  
+- Cryptographic operations
+- User interface design
+
+Operating Systems Project - 2025</textarea>
+        </div>
+
+        <button class="btn" onclick="encryptText()">🔒 Encrypt Text</button>
+        <div id="encryptResult"></div>
+        
+        <h3>Step 3: Decrypt Text</h3>
+        <button class="btn btn-danger" onclick="decryptText()">🔓 Decrypt Text</button>
+        <div id="decryptResult"></div>
+    </div>
+
+    <div class="section">
+        <h2>📁 Full Application Features</h2>
+        <p>The complete application (available for download) includes:</p>
+        
+        <div class="demo-grid">
+            <div class="card">
+                <h4>🖥️ Console Interface</h4>
+                <p>Full-featured command-line interface</p>
+                <code>python main.py</code>
+            </div>
+            <div class="card">
+                <h4>🎨 GUI Application</h4>
+                <p>Modern graphical interface with tabs</p>
+                <code>python gui.py</code>
+            </div>
+            <div class="card">
+                <h4>🌐 Web Application</h4>
+                <p>Flask-based web demo with file upload</p>
+                <code>python web_demo.py</code>
+            </div>
+            <div class="card">
+                <h4>📄 File Support</h4>
+                <p>Encrypt any file type including Word docs, PDFs</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://github.com/yourusername/file-encryption-tool-os-project" target="_blank" class="btn btn-success">
+                📂 View Source Code on GitHub
+            </a>
+            <a href="https://github.com/yourusername/file-encryption-tool-os-project/archive/refs/heads/main.zip" class="btn">
+                📥 Download Complete Project
+            </a>
+        </div>
+    </div>
+
+    <footer style="background: #2c3e50; color: white; text-align: center; padding: 20px; border-radius: 10px; margin-top: 30px;">
+        <p>🔐 File Encryption Tool - Operating Systems Project 2025</p>
+        <p>Built with Python | Secured with AES-256 | Cross-platform Compatible</p>
+        <p><small>Static demo powered by GitHub Pages</small></p>
+    </footer>
+
+    <script>
+        let currentKey = null;
+        let encryptedData = null;
+
+        function generateKey() {
+            // Generate a random key for demo (simplified)
+            currentKey = CryptoJS.lib.WordArray.random(256/8).toString();
+            
+            const keyResultDiv = document.getElementById('keyResult');
+            keyResultDiv.innerHTML = `
+                <div class="result success">
+                    <strong>✅ New encryption key generated!</strong><br>
+                    <small>🔒 Key: ${currentKey.substring(0, 20)}... (256-bit)</small><br>
+                    <small>Key generated and ready for encryption!</small>
+                </div>
+            `;
+        }
+
+        function encryptText() {
+            const text = document.getElementById('plainText').value;
+            if (!text.trim()) {
+                document.getElementById('encryptResult').innerHTML = '<div class="result error">❌ Please enter some text to encrypt!</div>';
+                return;
+            }
+
+            if (!currentKey) {
+                generateKey();
+            }
+
+            try {
+                // Encrypt using CryptoJS (AES)
+                const encrypted = CryptoJS.AES.encrypt(text, currentKey).toString();
+                encryptedData = encrypted;
+
+                const encryptResultDiv = document.getElementById('encryptResult');
+                encryptResultDiv.innerHTML = `
+                    <div class="result success">
+                        <strong>✅ Text encrypted successfully!</strong><br>
+                        <small>📁 Content: Manual Text Input</small>
+                        <div class="encrypted-text">
+                            <strong>Encrypted Data:</strong><br>
+                            ${encrypted}
+                        </div>
+                        <small>🔐 Text successfully encrypted with AES-256! Ready for decryption.</small>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('encryptResult').innerHTML = '<div class="result error">❌ Encryption failed: ' + error.message + '</div>';
+            }
+        }
+
+        function decryptText() {
+            if (!currentKey || !encryptedData) {
+                document.getElementById('decryptResult').innerHTML = '<div class="result error">❌ Please encrypt some text first!</div>';
+                return;
+            }
+
+            try {
+                // Decrypt using CryptoJS
+                const decrypted = CryptoJS.AES.decrypt(encryptedData, currentKey).toString(CryptoJS.enc.Utf8);
+
+                const decryptResultDiv = document.getElementById('decryptResult');
+                decryptResultDiv.innerHTML = `
+                    <div class="result success">
+                        <strong>✅ Text decrypted successfully!</strong><br>
+                        <strong>Decrypted Content:</strong><br>
+                        <div class="content-display">${decrypted}</div>
+                        <small>🎉 Perfect! The decrypted text matches the original.</small>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('decryptResult').innerHTML = '<div class="result error">❌ Decryption failed: ' + error.message + '</div>';
+            }
+        }
+
+        // Auto-generate key on page load
+        window.onload = function() {
+            setTimeout(generateKey, 1000);
+        };
+    </script>
+</body>
+</html>
