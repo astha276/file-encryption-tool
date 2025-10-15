@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, jsonify
+from flask import Flask, request, jsonify
 import base64
 import os
 import tempfile
@@ -91,7 +91,7 @@ def extract_text_from_file(file_path, filename, file_type):
 
 @app.route('/')
 def home():
-    return render_template_string('''
+    return '''
     <!DOCTYPE html>
     <html>
     <head>
@@ -388,7 +388,7 @@ Operating Systems Project - 2025</textarea>
         </script>
     </body>
     </html>
-    ''')
+    '''
 
 @app.route('/generate_key', methods=['POST'])
 def generate_key():
