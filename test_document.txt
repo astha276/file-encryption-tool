@@ -1,0 +1,7 @@
+Hello! This is a test document for encryption.
+This file contains sensitive information that needs to be protected.
+We will encrypt this file and then decrypt it back.
+
+Operating Systems Project - File Encryption Tool
+Student:
+Date: October 15, 2025
